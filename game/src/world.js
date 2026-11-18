@@ -1,0 +1,5 @@
+export const W=3200,H=2400;
+export const districts=[{name:'MARINA',y:0,color:'#263f43'},{name:'OLD TOWN',y:800,color:'#51443b'},{name:'DOCKS',y:1600,color:'#3c4240'}];
+export const places={home:{x:430,y:430},drop:{x:2560,y:1850},contact:{x:2260,y:1260},garage:{x:620,y:510},warehouse:{x:2700,y:2040},ambush:{x:1650,y:1120},journalist:{x:520,y:2100},tower:{x:2800,y:300},escape:{x:310,y:2000}};
+export function district(y){return districts[Math.min(2,Math.max(0,Math.floor(y/800)))].name}
+export function makeWorld(){const b=[];for(let y=90;y<H-80;y+=190){for(let x=90;x<W-350;x+=205){if((x>1450&&x<1730)||(y>770&&y<940))continue;b.push({x:x+((y/190|0)%2)*36,y,w:118+((x+y)%60),h:82+((x*y)%46),tone:(x*7+y*3)%4})}}const traffic=Array.from({length:28},(_,i)=>({x:80+(i*383)%2850,y:90+(i*277)%2200,a:i%2?0:Math.PI/2,v:24+(i%6)*4,color:['#df6e52','#e9be68','#5eb5a3','#849bb0'][i%4]}));const peds=Array.from({length:48},(_,i)=>({x:100+(i*173)%2800,y:100+(i*281)%2100,vx:Math.sin(i*7)*8,vy:Math.cos(i*5)*8,color:['#d7a680','#86bda8','#c7c5a2'][i%3]}));return {buildings:b,traffic,peds}}
